@@ -1,4 +1,8 @@
 \documentclass[12pt, letterpaper]{article}
+\usepackage{xcolor}
+
+\newcommand{\documentname}{\textsl{Note}}
+\newcommand{\todo}[1]{\textcolor{red}{#1}}  % gotta have \usepackage{xcolor} in main doc or this won't work
 
 \begin{document}
 
@@ -6,17 +10,99 @@
 
 \paragraph{Abstract:} foo and bar
 
+\section{Who are you?}
+
+I am assuming that anyone reading this \documentname\ has a
+significant fraction of the following properties:
+
 \section{Do we need machine learning in astronomy?}
 
 \section{Basic taxonomy of machine-learning tasks}
 
-\section{Canonical algorithms}
+...Warning: This \documentname\ will be extremely non-linear, because
+the connections across different subjects are myriad. If you know what
+you are doing, and all you are looking for is my polemical advice, you
+want to skip to \todo{where?}. If you just want to skim the relevant
+algorithm names to get some ideas for some application you have in
+mind, you can just read (or skim) \todo{what?}.
+
+...In the next sections we are going to give canonical algos (meaning:
+algos everyone should know, because they are gorgeous and simple) and
+some pointers to more sophisticated stuff. Then we will talk about
+statistical, conceptual, and mathematical considerations that cut
+across applications and algorithms.
+
+\section{Classification}
+
+...Supervised. In astro: Star--galaxy, high-redshift quasars, cosmic rays.
+
+...SVM
+
+...kSVM. Concept of non-parametrics, to be discussed below.
+
+...Rando Forest
+
+...NNs, CNNs, RNNs, GANs, etc
+
+...What is classification to a bayesian, and how does this relate?
+
+\section{Regression}
+
+...Supervised; relationship to classification. In astro: The Cannon. Kepler and LIGO systematics.
+
+...Linear regression!
+
+...Rando Forest, CNNs, and all the stuff from last section.
+
+...Gaussian Processes (and we will elaborate more later). Likelihood function appears!
+
+\section{Dimensionality reduction}
+
+...Unsupervised. In astro: spectral templates. Feature engineering.
+
+...PCA!
+
+...kPCA. Why don't astronomers use this? The Dual problem problem.
+
+...PPCA, FA, and latent-variable models like GPLVM
+
+...Manifold-learning and t-SNE. Relationships to visualization and feature engineering (more below).
+
+...auto-encoders: Probably useful!
+
+...GANs
+
+\section{Clustering}
+
+...Unsupervised. In astro: SNe types, spectral types.
+
+...k-means!
+
+...[Here I am weakest]
+
+...Using classifiers or regressions to find outliers. (The opposite of clustering.)
+
+\section{Density estimation}
+
+...Unsupervised. In astro: Comparing populations. Pseudo-LFs and pseudo-posteriors. Other things?
+
+...GMM with E-M algo!
+
+...Relationship to clustering and various confusions around that.
+
+...XD, and why we care. And how did this become a classification algorithm? Connections there.
+
+...RNADE
+
+...GANs: In what sense do these estimate density?
 
 \section{Rectangular data}
 
 ...format
 
 ...but also issues with missing data (to return below)
+
+\section{Distance metrics}
 
 \section{Statistical principles}
 
@@ -36,8 +122,6 @@
 
 \section{Active learning}
 
-\section{Distance metrics}
-
 \section{Feature engineering}
 
 \section{Interpretability}
@@ -55,5 +139,17 @@
 ...operational contexts
 
 ...emulators
+
+\paragraph{Acks}
+It is a pleasure to thank
+  Ross Fadely (Insight),
+  Rob Fergus (NYU),
+  Dan Foreman-Mackey (Flatiron),
+  Jennifer Hill (NYU),
+  Yann LeCun (NYU),
+  Sam Roweis (deceased),
+  and
+  Bernhard Sch\"olkopf (MPI-IS)
+for teaching me everything I know in this arena.
 
 \end{document}
