@@ -1,16 +1,73 @@
 \documentclass[12pt, letterpaper]{article}
 \usepackage{xcolor}
 
+% typesetting issues
+\linespread{1.08333} % 10/13 spacing
+\setlength{\topmargin}{-0.25in}
+\setlength{\textheight}{9.25in}
+\setlength{\headheight}{0.00in}
+\setlength{\headsep}{0.00in}
+\setlength{\parindent}{1.10\baselineskip}
+
+% text macros
 \newcommand{\documentname}{\textsl{Note}}
 \newcommand{\todo}[1]{\textcolor{red}{#1}}  % gotta have \usepackage{xcolor} in main doc or this won't work
 
-\begin{document}
+\begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing
 
-\section*{Machine learning for astronomers}
+\section*{Machine learning for astronomers%
+\footnote{This \documentname\ is copyright 2017 the author. Feel free to copy and
+distribute it, provided that you make no changes to it whatsoever.}}
 
-\paragraph{Abstract:} foo and bar
+\noindent
+\textbf{David W. Hogg%
+\footnote{For many of the ideas in this \documentname, I am indebted to
+  Jo Bovy (Toronto),
+  Rob Fergus (NYU),
+  Dan Foreman-Mackey (Flatiron),
+  Jennifer Hill (NYU),
+  Iain Murray (Edinburgh),
+  Sam Roweis (deceased),
+  and
+  Bernhard Sch\"olkopf (MPI-IS).}}\\
+\textsl{\footnotesize
+  Center for Cosmology and Particle Physics, Department of Physics, New York University \\
+  Center for Data Science, New York University \\
+  Max-Planck-Institut f\"ur Astronomie, Heidelberg \\
+  Flatiron Institute, a division of the Simons Foundation}
 
-\section{Who are you?}
+\paragraph{Abstract:}
+Machine learning methods---which are hard to define uncontroversially
+but which involve expertise-eschewing, data-driven methods for classification,
+regression, dimensionality reduction, density estimation, and clustering,
+with great flexibility or even non-parametric form---have transformed all
+of the sciences and commerce.
+Naturally, they are appearing in many contexts in astronomy and astrophysics and
+in such numbers that any kind of review or analysis would now be a fool's errand.
+Here I give a very personal discussion of these methods and lay out the costs and
+benefits of their adoption.
+And I provide some unsolicited advice!
+I highlight the five simplest and most elegant methods I know: support vector
+machines, linear regression, principal components analyis, Gaussian mixture models
+with expectation maximization, and k-means.
+I then discuss their limitations, generalizations, and alternatives, with a focus
+on some key qualities:
+For most astronomical contexts, we want methods that are interpretable (at least
+partially), generalizable (in at least some respects), probabilistic (in that
+there is something akin to a likelihood function involved, such that the method can
+be inserted into some bigger inference with informed causal structure).
+Very few high-performance or computationally tractable methods have any of these
+properties, and therefore (in my view),
+\emph{most machine-learning methods are not advisable for most astronomical
+applications!}
+Of course there are exceptions.
+I spend some time on the magic of kernels and non-parametrics, and in particular
+I highlight the Gaussian process, which shows great promise for astronomy.
+One of the primary goals of this \documentname\ is to attempt to set down for posterity
+some of the folk or tacit knowledge that is available in the community, but
+(nearly) invisible in the literature.
+
+\clearpage\section{Who are you?}
 
 I am assuming that anyone reading this \documentname\ has a
 significant fraction of the following properties:
@@ -147,17 +204,5 @@ across applications and algorithms.
 ...operational contexts
 
 ...emulators
-
-\paragraph{Acks}
-It is a pleasure to thank
-  Ross Fadely (Insight),
-  Rob Fergus (NYU),
-  Dan Foreman-Mackey (Flatiron),
-  Jennifer Hill (NYU),
-  Yann LeCun (NYU),
-  Sam Roweis (deceased),
-  and
-  Bernhard Sch\"olkopf (MPI-IS)
-for teaching me everything I know in this arena.
 
 \end{document}
