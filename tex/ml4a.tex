@@ -37,14 +37,14 @@ distribute it, provided that you make no changes to it whatsoever.}}
   Flatiron Institute, a division of the Simons Foundation}
 
 \paragraph{Abstract:}
-Machine learning methods---which are hard to define uncontroversially
-but which involve expertise-eschewing, data-driven methods for classification,
+Machine learning---which is hard to define uncontroversially
+but which involves expertise-eschewing, data-driven methods for classification,
 regression, dimensionality reduction, density estimation, and clustering,
-with great flexibility or even non-parametric form---have transformed all
+with methods that have great flexibility or even non-parametric form---has transformed all
 of the sciences and commerce.
-Naturally, they are appearing in many contexts in astronomy and astrophysics and
+Naturally, it is appearing in many contexts in astronomy and astrophysics and
 in such numbers that any kind of review or analysis would now be a fool's errand.
-Here I give a very personal discussion of these methods and lay out the costs and
+Here I give a very personal discussion of machine-learning methods and lay out the costs and
 benefits of their adoption.
 And I provide some unsolicited advice!
 I highlight the five simplest and most elegant methods I know: support vector
@@ -60,19 +60,51 @@ Very few high-performance or computationally tractable methods have any of these
 properties, and therefore (in my view),
 \emph{most machine-learning methods are not advisable for most astronomical
 applications!}
-Of course there are exceptions.
-I spend some time on the magic of kernels and non-parametrics, and in particular
+Of course there are exceptions, which I discuss.
+Additionally, I spend some time on the magic of kernels and non-parametrics, and in particular
 I highlight the Gaussian process, which shows great promise for astronomy.
-One of the primary goals of this \documentname\ is to attempt to set down for posterity
+One of the primary goals of this \documentname\ is to attempt to set down in writing
 some of the folk or tacit knowledge that is available in the community, but
 (nearly) invisible in the literature.
 
-\clearpage\section{Who are you?}
+\clearpage\section{Why machine learning in astronomy?}
+
+...Opening paragraph: Shit's complicated, and data are abundant. Models 
+are imperfect. Sometimes we just want to learn from the data.
+
+...Problems that only humans can solve at present.
+
+...Nuisances we don't care about.
+
+If I try to intuit the origins of the name ``machine learning'',
+I would guess it relates back to a branch of artificial intelligence,
+in which it became interesting to know whether a machine (that,
+presumably, does not have the experience or assumptions of a human)
+can perform scientific tasks that involve generalizing or learning from
+data.
+Indeed, some of my best friends still use the term
+this way, counting any computational inference (any use of a machine
+to learn parameters or properties of a data set) as machine learning.
+Here I am going to use the term more narrowly, to refer to the computational
+inferences that are very scientifically agnostic, that make use of extremely
+flexible (highly parameterized or even non-parametric) models, and
+that are defined with no reference to the particular data or domain in
+which they work.
+These include many things you have heard (or maybe even used),
+including principal components analysis, convolutional neural
+networks, random forests, \todo{[t-SNE here]}, auto-encoders,
+generative adversarial networks, support vector machines,
+and Gaussian processes,
+just to name a few\footnote{This short list (given
+  that it includes generative adversarial networks but does not
+  include whatever's next) will stand as a very precise time-stamp for
+  when this \documentname\ was written.}
+that have appeared in the astronomical literature.
+
+\section{Who are you?}
 
 I am assuming that anyone reading this \documentname\ has a
 significant fraction of the following properties:
-
-\section{Do we need machine learning in astronomy?}
 
 \section{Basic taxonomy of machine-learning tasks}
 
