@@ -69,18 +69,73 @@ some of the folk or tacit knowledge that is available in the community, but
 
 \clearpage\section{Why machine learning in astronomy?}
 
-...Opening paragraph: Shit's complicated, and data are abundant. Models 
-are imperfect. Sometimes we just want to learn from the data.
+Astronomy---thanks to enormous support from public and private funding
+agencies---is awash in beautiful and informative data, about planets, stars,
+black holes, accretion flows,
+the interstellar medium, the Milky Way, the local Universe, and the entire
+Hubble Volume, including the surface of last scattering.
+For all of these observed phenomena, we have physical models, executed
+with large computational simulations, of varying degress of maturity,
+that explain the observations.
+But of course the data are so rich and so informative and so featured
+that no physical model (yet) does justice to all of the details of these
+data.
+That is, there is far more to see and learn from the data than we can
+capture with our (necessarily simplified and limited) physical models.
+In some cases, there isn't even a working physical model at all.
 
-...Problems that only humans can solve at present...Nuisances we don't
-care about...Operational situations, where speed is of the essence.
+It is tempting, therefore, to attempt to transform some of the important
+scientific questions in astronomy from questions about how physical models are
+constrained by data into a more data-driven form.
+That is, when the data are far more featured than any model, it is interesting
+to ask whether the data can somehow \emph{become} the model.
+And indeed, sometimes questions \emph{can} be so transformed.
+For example, when we are looking for tiny, periodic exoplanet transit
+signals in the noisy light curve of a variable star, we don't necessarily
+need an accurate physical model of the stellar variability:
+We can use the empirical properties of the variability learned from
+other, similar stars.
+When we want to distinguish stars from quasars in multi-band imaging, we
+don't necessarily need accurate physical models for stars and quasars,
+we can use known stars and quasars to teach us the differences.
+In cases like these, the data \emph{is} the model.\footnote{\todo{Something about this phrase.}}
+
+Without digressing into a long discussion of precision and accuracy, I
+think it is worth noting here that data-driven methods can achieve
+unparalleled accuracy for some tasks:
+After all, the observed data provide---or can provide---a very
+\emph{accurate} model or picture of astrophysical phenomena \emph{in
+  the space of the data}.
+That is, if the goal is a model that reproduces the data (as it is in
+the planet-finding and classification tasks I just mentioned), a
+data-driven model is almost guaranteed to beat any physics-based
+model.\footnote{\todo{Argument about modeling the residuals, which is
+    more-or-less a proof.}}
+
+And there are other equally important tasks for which data-driven
+models can achieve unparalleled \emph{precision}:
+If a model is given the flexibility to capture informative features
+in a data set that are not captured by other, cruder models, then that
+model can use those features for inference.
+That is, a sufficiently flexible data-driven model can discover information
+sources in the data that more inflexible models might not capture.
+This has been true, for example, in our data-driven models of stars\footnote{\todo{cite Ness etc}},
+where small issues with atomic, molecular, and plasma physics prevent
+physical models of stellar photospheres from achieving the full precision
+on (say) element abundances available in the data, but a data-driven
+model does better (at least in terms of precision).
+
+Here we are going to look at the space of data-driven models that are
+referred to as ``machine learning''.
+These are generally and currently the most flexible forms of data-driven
+models, and they show great promise for some tasks in astronomy.
 
 If I try to intuit the origins of the name ``machine learning'',
 I would guess it relates back to a branch of artificial intelligence,
 in which it became interesting to know whether a machine (that,
 presumably, does not have the experience or assumptions of a human)
 can perform scientific tasks that involve generalizing or learning from
-data.
+data. \todo{Put a footnote here with a corrective to this.}
 Indeed, some of my best friends still use the term
 this way, counting any computational inference (any use of a machine
 to learn parameters or properties of a data set) as machine learning.
@@ -99,6 +154,10 @@ just to name a few\footnote{This short list (given
   include whatever's next) will stand as a very precise time-stamp for
   when this \documentname\ was written.}
 that have appeared in the astronomical literature.
+
+Once again: Why in astronomy?
+...Problems that only humans can solve at present...Nuisances we don't
+care about...Operational situations, where speed is of the essence.
 
 \section{Who are you?}
 
