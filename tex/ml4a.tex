@@ -1,3 +1,10 @@
+% This file is part of the ML4A project.
+% Copyright 2017, 2018 the author.
+
+% style notes:
+% ------------
+% - Am I consistent about the plurality of ``data''?
+
 \documentclass[12pt, letterpaper]{article}
 \usepackage{xcolor}
 
@@ -11,6 +18,8 @@
 
 % text macros
 \newcommand{\documentname}{\textsl{Note}}
+\newcommand{\foreign}[1]{\textsl{#1}}
+\newcommand{\vs}{\foreign{vs}}
 \newcommand{\todo}[1]{\textcolor{red}{#1}}  % gotta have \usepackage{xcolor} in main doc or this won't work
 
 \begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing
@@ -184,19 +193,98 @@ significant fraction of the following properties:
 
 ...Make sure to cite Bishop as background reading.
 
-\section{Basic taxonomy of machine-learning tasks}
-
 ...Warning: This \documentname\ will be extremely non-linear, because
 the connections across different subjects are myriad. If you know what
 you are doing, and all you are looking for is my polemical advice, you
 want to skip to \todo{where?}. If you just want to skim the relevant
 algorithm names to get some ideas for some application you have in
-mind, you can just read (or skim) \todo{what?}.
+mind, you can just read (or skim) \todo{what?}. If you just want to arm
+yourself with cynical, critical material for fending off machine-learning
+proponents, you will want to concentrate on \todo{which?}.
 
-...In the next sections we are going to give canonical algos (meaning:
-algos everyone should know, because they are gorgeous and simple) and
-some pointers to more sophisticated stuff. Then we will talk about
-statistical, conceptual, and mathematical considerations that cut
+\section{Basic taxonomy of machine-learning tasks}
+
+There is a hierarchy of machine-learning tasks, with boundaries that
+are a bit fuzzy.
+At the top of this hierarchy is the dichotomy between \emph{supervised}
+and \emph{unsupervised} methods.
+In supervised methods, the idea is that there is a \emph{training set}
+of data, for which there is some kind of data (in astronomy this would
+be imaging or spectroscopy or light curves or something like those),
+and there are also some kind of \emph{labels}.
+These might be binary labels (star \vs\ quasar, for example) or
+categorical labels (elliptical, spiral, lenticular, irregular, for
+example) or continuous labels (temperature and surface gravity and
+iron abundance, for example).
+The machine-learning task is to learn---from the training set---the
+relationship between the data and the labels, and then apply that
+relationship to infer new labels for previously unlabeled data.
+
+The primary supervised learning tasks are \emph{classification} (when
+the labels are binary or categorical) and \emph{regression} (when the
+labels are continuous.
+As in many other mathematical contexts (optimization, root finding,
+and so on), these tasks appear superficially similar, but the mathematical
+techniques look very different, because cardinality.
+We are going to talk about these tasks below, and even spell out for
+each of them a very simple, very powerful algorithm.
+Astronomers even with no machine-learning background are very used
+to performing tasks that looke like or are regressions:
+These are basically equivalent to fitting functional relationships to
+observed data.
+
+In the unsupervised methods, the idea is that there are no labels,
+there are just the data themselves.
+The machine-learning method or algorithm is asked to find
+structure in the data and describe or reveal or capitalize on that
+structure somehow.
+For example, think about typical images: They might have millions
+of pixels each and each pixel might have 24 bits of information in it.
+In principle, therefore, images live in a space that has a cardinality
+(in base 10) that requires tens of millions of decimal places!
+And yet, if you generate artificial data by just randomly choosing
+integers of that size and visualizing them as images, almost none of
+the numbers you will ever generate will look even the slightest bit
+like any real image that would be taken by a camera or a telescope.
+That is, real images live in a tiny, tiny subspace of all possible
+images.
+That is, the subspace of real images is highly informative.
+Unsupervised methods are designed to find and describe these subspaces.
+
+Unsupervised methods subdivide (again, only fuzzily) into various
+kinds of tasks.
+In \emph{clustering}, the goal is to categorize the data into categories
+of similar objects.
+In \emph{dimensionality reduction}, the goal is to project or
+transform the (usually high dimensional) data into a lower dimensional
+space that is smaller but somehow captures or preserves most or all or
+the most important structure.
+In \emph{density estimation}, the goal is to describe the distribution
+of data within the data space in a volumetric or measure sense.
+
+In some sense, clustering and dimensionality reduction are very closely
+related, with one being categorical and the other continuous.
+They both try to replace the high dimensional data with a smaller number of
+pieces of information (discrete classes or continuous features).
+These are related  in the
+same sense that classification and regression are closely related.
+Density estimation is generally far harder than either clustering
+or dimensionality reduction, especially as the dimensionality of the
+data get large, because it is hard to build models (or have training
+data) that have support in a large fraction of even any relevant
+subspace of any high dimensional space.
+
+In the next five sections I am going to describe in some detail one
+canonical algorithm or method for each of these five tasks
+(classification, regression, dimensionality reduction, clustering,
+and density estimation).
+I will choose these five algorithms on the basis of their beauty, their
+simplicity, their power, and their pedagogical value.
+I will follow the canonical algorithm descriptions with discussions
+of limitations, extensions, and far more powerful algorithms, along
+with some barely justifiable advice.
+These five sections are followed by sections that discuss statistical,
+conceptual, scientific, and mathematical considerations that cut
 across applications and algorithms.
 
 \section{Classification}
