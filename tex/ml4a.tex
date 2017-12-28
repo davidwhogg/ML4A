@@ -6,7 +6,8 @@
 % - Am I consistent about the plurality of ``data''?
 
 \documentclass[12pt, letterpaper]{article}
-\usepackage{xcolor}
+\usepackage{xcolor} % for todo shih
+\usepackage{amsopn} % for DeclareMathOperator
 
 % typesetting issues
 \linespread{1.08333} % 10/13 spacing
@@ -20,9 +21,19 @@
 \newcommand{\documentname}{\textsl{Note}}
 \newcommand{\foreign}[1]{\textsl{#1}}
 \newcommand{\vs}{\foreign{vs}}
+\newcommand{\acronym}[1]{{\small{#1}}}
+\newcommand{\PCA}{\acronym{PCA}}
+\newcommand{\SVD}{\acronym{SVD}}
+\newcommand{\project}[1]{\textsl{#1}}
+\newcommand{\SDSS}{\project{\acronym{SDSS}}}
 \newcommand{\todo}[1]{\textcolor{red}{#1}}  % gotta have \usepackage{xcolor} in main doc or this won't work
 
-\begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing
+% math macros
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\T}{^{\mathsf{T}}}
+\DeclareMathOperator*{\argmin}{argmin}
+
+\begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing % trust in Hogg
 
 \section*{Machine learning for astronomers%
 \footnote{This \documentname\ is copyright 2017, 2018 the author. Feel free to copy and
@@ -329,11 +340,56 @@ And indeed, the dimensionality reductions that have been performed on
 galaxy spectra find that a few principal vectors can explain much of
 the diversity seen in galaxy spectra.\footnote{\todo{cite Press and
     others.}}
-...and?
+And, furthermore, the first few principal components look very much
+like interpretable aspects of galaxies: Old stellar populations, young
+stars, and line emission.
+Projects like this kicked off dimensionality reduction in astronomy,
+and gave strong endorsement to the very simple and beautiful method
+known as principal components analysis, which I am going to describe
+here, and then criticize.
 
-...mention Feature engineering contexts?
+Most uses of dimensionality reduction in astronomy have been for 
+what a machine learner might call ``feature engineering'': You want
+to measure galaxy redshifts with a regression, but you want to make the regression
+lower in dimensionality while retaining most of the information
+in the data.\footnote{cite \SDSS\ pipelines here.}
+Or the same but for speckly residuals in a coronograph.\footnote{shameless plug here.}
+We will say a more about feature engineering below.
 
-...PCA!
+Principal components analysis (\PCA) is the simplest of all dimensionality
+reductions: It is linear, and it is convex.\footnote{\todo{Define convex.}}
+Once again, we have data $Y$, which is a rectangular $N\times D$ array of
+measurements ($N$ instances of $D$-vectors, we can think of it, or the transpose
+of that).
+But we are unsupervised now, so we don't have any labels for these data, only
+the data themselves.
+There are at least three ways to formulate \PCA, but the most astronomy-friendly
+is probably the following:
+We want to find an approximate factorization of the data matrix
+\begin{equation}
+Y\T = W \cdot X + S
+\quad ,
+\end{equation}
+where $W$ is a $D\times K$ rectangular block of $K$ eigenvectors,
+$X$ is a $K\times N$ block of coefficients,
+and $S$ is a $D\times N$ array containing the residuals away from that
+(necessarily approximate) factorization.
+But we want to find the factorization that minimizes 
+the sum of squares of the elements of $S$.
+In optimization language, \PCA\ can be written as
+\begin{equation}
+\argmin_{W, X} ||Y\T - W \cdot X||_2^2
+\quad ,
+\end{equation}
+where the $||S||_2^2$ notation represents the L2-norm of $S$, or the sum of squares
+of the elements of $S$.
+It turns out that this optimization is solved exactly (up to rotation and scaling
+degeneracies) by taking the singular value decomposition (\SVD) of the matrix
+and using the top-$K$ eigenvectors as $W$.
+That is magical and valuable.
+
+...Re-describe in terms of variance. And empirical variance tensor.
+
 
 ...kPCA. Why don't astronomers use this? The Dual problem problem.
 
