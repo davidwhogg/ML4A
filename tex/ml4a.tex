@@ -19,6 +19,7 @@
 
 % text macros
 \newcommand{\documentname}{\textsl{Note}}
+\newcommand{\equationname}{equation}
 \newcommand{\foreign}[1]{\textsl{#1}}
 \newcommand{\vs}{\foreign{vs}}
 \newcommand{\acronym}[1]{{\small{#1}}}
@@ -363,7 +364,7 @@ measurements ($N$ instances of $D$-vectors, we can think of it, or the transpose
 of that).
 But we are unsupervised now, so we don't have any labels for these data, only
 the data themselves.
-There are at least three ways to formulate \PCA, but the most astronomy-friendly
+There are several ways to formulate \PCA, but the most astronomy-friendly
 is probably the following:
 We want to find an approximate factorization of the data matrix
 \begin{equation}
@@ -377,18 +378,42 @@ and $S$ is a $D\times N$ array containing the residuals away from that
 But we want to find the factorization that minimizes 
 the sum of squares of the elements of $S$.
 In optimization language, \PCA\ can be written as
-\begin{equation}
+\begin{equation}\label{eq:pcaopt}
 \argmin_{W, X} ||Y\T - W \cdot X||_2^2
 \quad ,
 \end{equation}
 where the $||S||_2^2$ notation represents the L2-norm of $S$, or the sum of squares
-of the elements of $S$.
+of the elements of $S$.\footnote{\todo{Brief digression on norms and notation?}}
 It turns out that this optimization is solved exactly (up to rotation and scaling
 degeneracies) by taking the singular value decomposition (\SVD) of the matrix $Y$
 and using the top-$K$ eigenvectors as $W$.
 That is magical and valuable.
 
-...Re-describe in terms of variance. And empirical variance tensor.
+In practice usually we subtract a mean from $Y$ before performing \PCA.
+That is, find the mean $D$-vector by averaging $Y$ over the $N$ axis,
+and then subtracting that $D$-vector from each of the $N$ $D$-vectors
+in $Y$.
+This isn't necessary, but it is sensible, because \PCA\ is a description
+of the \emph{variance} of the data $Y$.
+
+Along those lines:
+Another description of \PCA\ is that it is an attempt to find the directions of
+maximum (empirical) variance.
+That is, if you construct the $D\times D$ empirical variance tensor $V$ by
+\begin{equation}
+V = \frac{1}{N}\,Y\T \cdot Y
+\end{equation}
+(or again the same after subtracting the mean),
+then the \PCA\ eigenvectors in $W$ will be the directions (or $K$-dimensional
+linear subspace) that contains the largest fraction of the empirical variance in the data.
+That is another description of the method; it is equivalent
+because the objective that is being minimized in \equationname~(\ref{eq:pcaopt})
+is proportional to the variance of the residual.
+In this formalism, the $D$-vectors in $W$ are the $K$ largest-eigenvalue
+eigenvectors of the empirical variance tensor, found by diagonalization of $V$.
+In general it is faster and more numerically stable to take the \SVD\ of $Y$
+than the diagonalization of $V$, but these descriptions are mathematically
+equivalent.
 
 ...kPCA. Why don't astronomers use this? The Dual problem problem.
 
