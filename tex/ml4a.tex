@@ -19,6 +19,8 @@
 
 % text macros
 \newcommand{\documentname}{\textsl{Note}}
+\newcommand{\sectionname}{section}
+\newcommand{\sectionnames}{sections}
 \newcommand{\equationname}{equation}
 \newcommand{\foreign}[1]{\textsl{#1}}
 \newcommand{\vs}{\foreign{vs}}
@@ -27,6 +29,7 @@
 \newcommand{\SVD}{\acronym{SVD}}
 \newcommand{\project}[1]{\textsl{#1}}
 \newcommand{\SDSS}{\project{\acronym{SDSS}}}
+\newcommand{\Kepler}{\project{Kepler}}
 \newcommand{\todo}[1]{\textcolor{red}{#1}}  % gotta have \usepackage{xcolor} in main doc or this won't work
 
 % math macros
@@ -448,15 +451,52 @@ are some directions that we know are more important than others.
 A fifth is that the algorithm implicitly treats all $N$ data points as equally
 important; often we know that some are much better measured (or much more important)
 than others.
+A sixth---and like many of the above objections, this objection applies to
+many dimensionality-reduction methods---is that the user must choose the integer
+$K$.
+There is no principled or even probabilistic method for choosing $K$ without
+substantially extending or modifying the method.
+Many of the above objections apply not just to \PCA\ but to many of the methods
+described throughout this document.
+The reader might sense some repetition here and in the \sectionnames to follow.
+
+One way to phrase my objection to \PCA\ is that it is an \emph{algorithm}
+and not a \emph{model}.
+It does not have stated (or even stateable) assumptions.
+It is just an arithmetic procedure applied to data.
+That said, the procedure has great properties, is easy to use, and has
+delivered value for astronomy.
+
+The output of \PCA\ can be used in a few ways:
+The $W$ array of eigenvectors can be used now as a new basis that represents a
+data-driven subspace of the original data.
+This is how we use it (say) when we want a data-driven set of vectors for fitting
+\Kepler\ light curves of stars.\footnote{Cite DFM, Luger.}
+But also the $X$ array of coefficients can be used as a dimensionality-reduced,
+rotated data space.
+Often any clustering or nonlinear structure in the original data is clearer in
+the coefficient space.
+\todo{Astronomical example: When is this the use case?}
+But there is another way to use the output:
+The multiplies $W\cdot X$ can be used as replacements for the data!
+If the data are pretty good, and the integer $K$ is chosen well, then these
+low-rank approximations to the data will be (or at least look like) de-noised
+versions of the data.
+\todo{Astronomical example of when this is used.}
 
 ...Just like kSVM: kPCA. Why don't astronomers use this? The Dual problem problem.
 
-...PPCA, FA, and latent-variable models like GPLVM
+...Use kPCA to feed into Manifold-learning and t-SNE.
+Relationships to visualization and feature engineering (more below).
+
+To fix the objection that \PCA\ is not probabilistic, or doesn't have well
+defined assumptions---it isn't a model, really---there have been several
+extensions of \PCA:
+...PPCA, FA
+
+...latent-variable models like GPLVM
 
 ...Robust PCA -- both the good and bad versions of that.
-
-...Manifold-learning and t-SNE.
-Relationships to visualization and feature engineering (more below).
 
 ...auto-encoders: Probably useful!
 
