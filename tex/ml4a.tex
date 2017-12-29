@@ -5,17 +5,24 @@
 % ------------
 % - Am I consistent about the plurality of ``data''?
 
-\documentclass[12pt, letterpaper]{article}
+\documentclass[12pt, twoside, letterpaper]{article}
 \usepackage{xcolor} % for todo shih
 \usepackage{amsopn} % for DeclareMathOperator
 
 % typesetting issues
+\renewcommand{\Large}{\normalsize}  % punking article.cls
+\renewcommand{\large}{\normalsize}  % punking article.cls
 \linespread{1.08333} % 10/13 spacing
 \setlength{\topmargin}{-0.25in}
 \setlength{\textheight}{9.25in}
-\setlength{\headheight}{0.00in}
-\setlength{\headsep}{0.00in}
+\setlength{\headheight}{2ex}
+\setlength{\headsep}{4ex}
+\addtolength{\textheight}{-\headheight}
+\addtolength{\textheight}{-\headsep}
 \setlength{\parindent}{1.10\baselineskip}
+\pagestyle{headings}\markboth{\textsc{david w. hogg}}{\textsc{machine learning in astronomy}}
+\renewcommand{\sectionmark}[1]{}    % punking article.cls
+\renewcommand{\subsectionmark}[1]{} % punking article.cls
 
 % text macros
 \newcommand{\documentname}{\textsl{Note}}
@@ -37,7 +44,7 @@
 \newcommand{\T}{^{\mathsf{T}}}
 \DeclareMathOperator*{\argmin}{argmin}
 
-\begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing % trust in Hogg
+\begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing\thispagestyle{empty} % trust in Hogg
 
 \section*{Machine learning for astronomers%
 \footnote{This \documentname\ is copyright 2017, 2018 the author. Feel free to copy and
