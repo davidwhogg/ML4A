@@ -415,13 +415,45 @@ In general it is faster and more numerically stable to take the \SVD\ of $Y$
 than compute the diagonalization of $V$, but these descriptions are mathematically
 equivalent.
 
-...All the reasons PCA is absolutely great.
+\PCA\ is a remarkable and versatile algorithm.
+It is fast and convex.
+When run on very good data (and more on what I mean by this below), it returns
+sensible results, often even (apparently) interpretable results.
+It has enabled scientific results in a range of astrophysical contexts.
 
-...All the reasons it is terrible.
+However, \PCA\ also has enormous disadvantages.
+The first disadvantage is that it is an algorithm to describe the full,
+empirical variance in the data.
+That is, it makes no distinctions between variance that comes from (say)
+instrument noise, or from (say) variation in galaxy star-formation histories,
+or from (say) cosmic-ray hits.
+It mashes all sources of variance together and treats them together.
+This makes the components (technically) uninterpretable (and relates to the
+fact that the components only become apparently interpretable as the data become good---high
+in signal-to-noise and free of outliers).
+Relatedly, the second disadvantage of \PCA\ is that it's objective function
+(the L2 norm of the residuals) treats every data point
+as equally important.
+There is no weighting or noise model at all, and no capacity for handling
+missing data.
+For this reason, a data set with outliers, missing data, or bad data can deliver
+principal components that are highly corrupted.
+A third disadvantage is that the algorithm is precisely linear; it only
+considers linear projections of the data.
+Often the structure is non-linear!
+A fourth is that the algorithm implicitly adopts an isotropic distance metric
+in the $D$-dimensional data space, 
+in which all directions in the data space are equally important; often there
+are some directions that we know are more important than others.
+A fifth is that the algorithm implicitly treats all $N$ data points as equally
+important; often we know that some are much better measured (or much more important)
+than others.
 
 ...Just like kSVM: kPCA. Why don't astronomers use this? The Dual problem problem.
 
 ...PPCA, FA, and latent-variable models like GPLVM
+
+...Robust PCA -- both the good and bad versions of that.
 
 ...Manifold-learning and t-SNE.
 Relationships to visualization and feature engineering (more below).
