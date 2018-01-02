@@ -3,7 +3,9 @@
 
 % style notes:
 % ------------
-% - Am I consistent about the plurality of ``data''?
+% - Am I consistent about the plurality of `data'?
+% - Don't get cute with the footnotes.
+% - Only use \section{} and \paragraph{} and description list. Nothing else for structure.
 
 \documentclass[12pt, twoside, letterpaper]{article}
 \usepackage{xcolor} % for todo shih
@@ -42,8 +44,9 @@
 \addtolength{\textheight}{-\headsep}
 \setlength{\parindent}{1.10\baselineskip}
 \pagestyle{headings}\markboth{\textsc{david w. hogg}}{\textsc{\MakeLowercase{\thistitle}}}
-\renewcommand{\sectionmark}[1]{}    % punking article.cls
-\renewcommand{\subsectionmark}[1]{} % punking article.cls
+\renewcommand{\sectionmark}[1]{}    % punking article.cls -- headings
+\renewcommand{\subsectionmark}[1]{} % punking article.cls -- headings
+\renewcommand{\thefootnote}{{\bfseries{\arabic{footnote}}}}
 
 \begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing\thispagestyle{empty} % trust in Hogg
 
@@ -403,6 +406,10 @@ It turns out that this optimization is solved exactly (up to rotation and scalin
 degeneracies) by taking the singular value decomposition (\SVD) of the matrix $Y$
 and using the top-$K$ eigenvectors as $W$.
 That is magical and valuable.
+The $X$ array also comes out of the \SVD, or you can get it by projecting the
+data $Y$ onto
+the eigenvectors in $W$, so long as the eigenvectors are orthonormal (which they
+are, when produced by the \SVD).
 
 In practice usually we subtract a mean from $Y$ before performing \PCA.
 That is, find the mean $D$-vector by averaging $Y$ over the $N$ axis,
@@ -429,6 +436,9 @@ eigenvectors of the empirical variance tensor, found by diagonalization of $V$.
 In general it is faster and more numerically stable to take the \SVD\ of $Y$
 than compute the diagonalization of $V$, but these descriptions are mathematically
 equivalent.
+
+...Going further...rescaling objects b/c brightness; rescaling data dimensions b/c units.
+...Relation to feature engineering.
 
 \PCA\ is a remarkable and versatile algorithm.
 It is fast and convex.
