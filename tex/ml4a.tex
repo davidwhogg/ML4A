@@ -426,7 +426,7 @@ That is, if you construct the $D\times D$ empirical variance tensor $V$ by
 V = \frac{1}{N}\,Y\T \cdot Y
 \end{equation}
 (or again the same after subtracting the mean),
-then the \PCA\ eigenvectors in $W$ will be the directions (or $K$-dimensional
+then the top-$K$ \PCA\ eigenvectors in $W$ will be the $K$ directions (or $K$-dimensional
 linear subspace) that contains the largest fraction of the empirical variance in the data.
 That is another description of the method; it is equivalent
 because the objective that is being minimized in \equationname~(\ref{eq:pcaopt})
@@ -439,6 +439,8 @@ equivalent.
 
 ...Going further...rescaling objects b/c brightness; rescaling data dimensions b/c units.
 ...Relation to feature engineering.
+
+...Mention the dual-space version -- complete symmetry between the $N$-vectors and the $D$-vectors.
 
 \PCA\ is a remarkable and versatile algorithm.
 It is fast and convex.
