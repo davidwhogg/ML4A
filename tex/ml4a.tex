@@ -236,7 +236,7 @@ At the top of this hierarchy is the dichotomy between \emph{supervised}
 and \emph{unsupervised} methods.
 In supervised methods, the idea is that there is a \emph{training set}
 of data, for which there is some kind of data (in astronomy this would
-be imaging or spectroscopy or light curves or something like those),
+be photometry or imaging or spectroscopy or light curves or something like those),
 and there are also some kind of \emph{labels}.
 These might be binary labels (star \vs\ quasar, for example) or
 categorical labels (elliptical, spiral, lenticular, irregular, for
@@ -324,6 +324,8 @@ across applications and algorithms.
 
 ...kSVM. Concept of non-parametrics, to be discussed below.
 
+...logistic regression
+
 ...Rando Forest
 
 ...NNs, CNNs, RNNs, GANs, etc
@@ -332,9 +334,47 @@ across applications and algorithms.
 
 \section{Example: Linear Regression}
 
-...Supervised; relationship to classification. In astro: The Cannon. Kepler and LIGO systematics.
+Regression is just the same as classification, but for the case
+in which the class labels are continuous variables.
+For example, with \project{The Cannon}, we used a regression
+to determine the effective temperature, surface gravity, and
+metallicity of stars with a data-driven model, where the data
+were stellar spectra.\footnote{\todo{Cite}}
+For another example, in photometric-redshift schemes, the idea
+is to use photometric data on galaxies to infer galaxy or
+quasar redshifts,
+which are continuous labels.\footnote{\todo{Cite lots}}
+One major use of regression is to remove nuisances from complex
+data:
+In (for example) \project{Kepler} light curves, the systematics
+introduced by the spacecraft pointing and thermal state put
+big signals into the data in which we are looking for exoplanet
+transits.
+Common practice is to use a regression to predict and remove
+(or better, simultaneosly model) these systematics when searching
+for exoplanets.\footnote{\todo{Cite lots}}
 
+The absolutely \emph{simplest and most underappreciated} machine-learning
+method on the books is \emph{linear regression}.
+With good engineering, and a few tricks (which we discuss below), linear
+regression can be extremely powerful, and exceedingly fast.\footnote{%
+  \todo{Something about \project{The Cannon} here.}}
+Here we permit an arbitrary, large linear combination of data to predict
+the labels.
+As with regression, we have an $N\times D$ rectangular block of data $Y$,
+and a $N$-vector (or $N\times 1$ rectangular block) of labels $X$.
+But this time the labels will be continuous rather than discrete.
 ...Linear regression!
+
+...Going up in powers or functions of data
+...preview kernel trick
+
+...Regularization L2 and L1.
+
+...There can be more than one label! Consider $N\times L$ labels.
+...Simplest case: Do each one independently!
+
+...Advantages and disadvantages of this method.
 
 \section{Regression}
 
@@ -405,7 +445,7 @@ of the elements of $S$.\footnote{\todo{Brief digression on norms and notation?}}
 It turns out that this optimization is solved exactly (up to rotation and scaling
 degeneracies) by taking the singular value decomposition (\SVD) of the matrix $Y$
 and using the top-$K$ eigenvectors as $W$.
-That is magical and valuable.
+\emph{That is magical and valuable.}
 The $X$ array also comes out of the \SVD, or you can get it by projecting the
 data $Y$ onto
 the eigenvectors in $W$, so long as the eigenvectors are orthonormal (which they
