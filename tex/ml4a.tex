@@ -5,7 +5,7 @@
 % ------------
 % - Am I consistent about the plurality of `data'?
 % - Don't get cute with the footnotes.
-% - Only use \section{} and \paragraph{} and description list. Nothing else for structure.
+% - Only use \section{}, \subsection{}, \paragraph{}, and description list. Nothing else for structure.
 
 \documentclass[12pt, twoside, letterpaper]{article}
 \usepackage{xcolor} % for todo shih
@@ -22,6 +22,7 @@
 \newcommand{\acronym}[1]{{\small{#1}}}
 \newcommand{\PCA}{\acronym{PCA}}
 \newcommand{\SVD}{\acronym{SVD}}
+\newcommand{\KDE}{\acronym{KDE}}
 \newcommand{\project}[1]{\textsl{#1}}
 \newcommand{\SDSS}{\project{\acronym{SDSS}}}
 \newcommand{\Kepler}{\project{Kepler}}
@@ -104,7 +105,9 @@ One of the primary goals of this \documentname\ is to attempt to set down in wri
 some of the folk or tacit knowledge that is available in the community, but
 (nearly) invisible in the literature.
 
-\clearpage\section{Why machine learning in astronomy?}
+\clearpage\section{Introduction}
+
+\subsection{Why machine learning in astronomy?}
 
 Astronomy---thanks to enormous support from public and private funding
 agencies---is awash in beautiful and informative data, about planets, stars,
@@ -214,7 +217,7 @@ of cases here.
 ...Speeding computation; emulators.
 \end{description}
 
-\section{Who are you?}
+\subsection{Who are you?}
 
 ...I am assuming that anyone reading this \documentname\ has a
 significant fraction of the following properties:
@@ -232,7 +235,7 @@ mind, you can just read (or skim) \todo{what?}. If you just want to arm
 yourself with cynical, critical material for fending off machine-learning
 proponents, you will want to concentrate on \todo{which?}.
 
-\section{Basic taxonomy of machine-learning tasks}
+\subsection{Basic taxonomy of machine-learning tasks}
 
 There is a hierarchy of machine-learning tasks, with boundaries that
 are a bit fuzzy.
@@ -318,13 +321,15 @@ These discussions are followed by sections that address statistical,
 conceptual, scientific, and mathematical considerations that cut
 across applications and algorithms.
 
-\section{Example: SVM}
+\section{Classification}
 
 ...Supervised. In astro: Star--galaxy, high-redshift quasars, cosmic rays.
 
+\subsection{Example: SVM}
+
 ...SVM
 
-\section{Classification}
+\subsection{Advanced methods}
 
 ...kSVM. Concept of non-parametrics, to be discussed below.
 
@@ -334,9 +339,17 @@ across applications and algorithms.
 
 ...NNs, CNNs, RNNs, GANs, etc
 
+...What we did for XDQSO
+
+\subsection{Philosophy and advice}
+
 ...What is classification to a bayesian, and how does this relate?
 
-\section{Example: Linear Regression}
+...Noise models; data of different quality; missing data.
+
+...Generalizability.
+
+\section{Regression}
 
 Regression is just the same as classification, but for the case
 in which the class labels are continuous variables.
@@ -357,6 +370,8 @@ transits.
 Common practice is to use a regression to predict and remove
 (or better, simultaneosly model) these systematics when searching
 for exoplanets.\footnote{\todo{Cite lots}}
+
+\subsection{Example: Linear Regression}
 
 The absolutely \emph{simplest and most underappreciated} machine-learning
 method on the books is \emph{linear regression}.
@@ -382,7 +397,7 @@ But this time the labels will be continuous rather than discrete.
 
 ...Advantages and disadvantages of this method.
 
-\section{Regression}
+\subsection{Advanced methods}
 
 ...Rando Forest, CNNs, and all the stuff from last section.
 
@@ -392,7 +407,13 @@ But this time the labels will be continuous rather than discrete.
 Likelihood function re-appears!
 Connection to kernel trick.
 
-\section{Example: PCA}
+\subsection{Philosophy and advice}
+
+...Importance of noise models.
+
+...Knowledge about smoothness, etc.
+
+\section{Dimensionality Reduction}
 
 Dimensionality reduction is the first of the three unsupervised
 method categories to be discussed.
@@ -420,6 +441,8 @@ lower in dimensionality while retaining most of the information
 in the data.\footnote{cite \SDSS\ pipelines here.}
 Or the same but for speckly residuals in a coronograph.\footnote{shameless plug here.}
 We will say a more about feature engineering below.
+
+\subsection{Example: PCA}
 
 Principal components analysis (\PCA) is the simplest of all dimensionality
 reductions: It is linear, and it is convex.\footnote{\todo{Define convex.}}
@@ -554,7 +577,7 @@ low-rank approximations to the data will be (or at least look like) de-noised
 versions of the data.
 \todo{Astronomical example of when this is used.}
 
-\section{Dimensionality reduction}
+\subsection{Advanced methods}
 
 ...Just like kSVM: kPCA. Why don't astronomers use this? The Dual problem problem.
 
@@ -574,27 +597,64 @@ extensions of \PCA:
 
 ...GANs
 
-\section{Example: k-means}
-
-...Unsupervised. In astro: SNe types, spectral types.
-
-...k-means!
+\subsection{Philosophy and advice}
 
 \section{Clustering}
 
+...Unsupervised. In astro: SNe types, spectral types.
+
+\subsection{Example: k-means}
+
+...k-means!
+
+\subsection{Advanced methods}
+
 ...[Here I am weakest]
+
+\subsection{Philosophy and advice}
 
 ...Using classifiers or regressions to find outliers. (The opposite of clustering.)
 
-\section{Example: GMMs with EM}
+\section{Density estimation}
 
-...Unsupervised. In astro: Comparing populations. Pseudo-LFs and pseudo-posteriors. Other things?
+The most difficult of all unsupervised tasks is density estimation:
+Given a set of points drawn from a probability density function (pdf),
+infer the density everywhere.
+This task is technically impossible in high dimensions, because it is
+impossible to have enough data to critically sample a pdf in a (say)
+thousand-dimensional space.\footnote{Estimates vary, but the number of points
+  required seems to scale \emph{faster} than the exponential of the dimension $D$,
+  something more like $D$ factorial. For $D=1000$, that's a big number.}
+That said, in the next \sectionname, I will give examples of some methods
+that have success at large $D$.
 
+In astrophysics, density estimation comes up in a few places:
+One is if you are performing a Bayesian inference, maybe with a cosmological simulation
+as part of your model, and you can only afford to take a few samples from your posterior
+pdf (which lives in some parameter space).
+If you want to have some idea of the posterior pdf everywhere, you
+need a density estimate.\footnote{\todo{Cite Marshall here, and also
+    Tollerud?}}
+Another place for density estimation is in galaxy redshift surveys:
+In order to measure the clustering of the large-scale structure, you need to
+know the radial selection function of the survey, but your best data for inferring
+it are the observed redshifts in the data sample itself.\footnote{\todo{cite}}
+Another is outlier identification: Is a particular stellar spectrum (say) an
+outlier away from the distribution of stellar spectra?
+You can't answer that if you don't know where stellar spectra lie in spectrum space.
+
+The simplest density estimate is the kernel density estimate (\KDE).
+A \KDE\ is a smoothing of the data themselves.
+The density estimate is the...
+
+\subsection{Example: GMMs with EM}
+
+The most beautiful model 
 ...GMM with E-M algo!
 
 ...Relationship to clustering and various confusions around that.
 
-\section{Density estimation}
+\subsection{Advanced methods}
 
 ...XD, and why we care. And how did this become a classification algorithm? Connections there.
 
@@ -602,7 +662,11 @@ extensions of \PCA:
 
 ...GANs: In what sense do these estimate density?
 
-\section{Rectangular data}
+\subsection{Philosphy and advice}
+
+\section{Cross-cutting themes}
+
+\subsection{Rectangular data}
 
 ...format
 
@@ -614,11 +678,11 @@ extensions of \PCA:
 
 ...importance of distance metrics if you can't!
 
-\section{Distance metrics}
+\subsection{Distance metrics}
 
 ...Most ML methods are nearest-neighbor methods, in some sense!
 
-\section{Statistical principles}
+\subsection{Statistical principles}
 
 ...train, validate, and test.
 
@@ -626,21 +690,23 @@ extensions of \PCA:
 
 ...stationarity requirements
 
-\section{Probabilistic methods}
+\subsection{Feature engineering}
 
-\section{Concept of non-parametrics}
+\subsection{The kernel trick}
 
-\section{The kernel trick}
+\subsection{Concept of non-parametrics}
 
-\section{Gaussian processes}
+\subsection{Active learning}
 
-\section{Active learning}
+\section{Interpretability, probabilism and causal structure}
 
-\section{Feature engineering}
+\subsection{Interpretability}
 
-\section{Interpretability}
+\subsection{Generalizability}
 
-\section{Generalizability}
+\subsection{Probabilistic methods}
+
+\subsection{Gaussian processes}
 
 \section{Unsolicited advice}\label{sec:advice}
 
