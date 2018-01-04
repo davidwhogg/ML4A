@@ -14,8 +14,8 @@
 % text macros
 \newcommand{\thistitle}{Machine learning for astronomers}
 \newcommand{\documentname}{\textsl{Note}}
-\newcommand{\sectionname}{section}
-\newcommand{\sectionnames}{sections}
+\newcommand{\sectionname}{Section}
+\newcommand{\sectionnames}{Sections}
 \newcommand{\equationname}{equation}
 \newcommand{\foreign}[1]{\textsl{#1}}
 \newcommand{\vs}{\foreign{vs}}
@@ -223,8 +223,10 @@ significant fraction of the following properties:
 
 ...Warning: This \documentname\ will be extremely non-linear, because
 the connections across different subjects are myriad. If you know what
-you are doing, and all you are looking for is my polemical advice, you
-want to skip to \todo{where?}. If you just want to skim the relevant
+you are doing, and all you are looking for is my advice, you
+want to skip to \sectionname~\ref{sec:advice}, where I gather, repeat,
+and summarize all the polemical statements I make throughout the text.
+If you just want to skim the relevant
 algorithm names to get some ideas for some application you have in
 mind, you can just read (or skim) \todo{what?}. If you just want to arm
 yourself with cynical, critical material for fending off machine-learning
@@ -640,7 +642,10 @@ extensions of \PCA:
 
 \section{Generalizability}
 
-\section{Unsolicited advice}
+\section{Unsolicited advice}\label{sec:advice}
+
+\todo{Make here a full description-style list of all the
+  advice I have given through the document.}
 
 ...only GPs are fully probabilistic and non-parametric
 
