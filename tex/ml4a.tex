@@ -34,7 +34,9 @@
 \DeclareMathOperator*{\argmin}{argmin}
 
 % typesetting issues
-\renewcommand{\Large}{\normalsize}  % punking article.cls
+\makeatletter
+\renewcommand\Large{\@setfontsize\large\@xivpt{18}}
+\makeatother
 \renewcommand{\large}{\normalsize}  % punking article.cls
 \linespread{1.08333} % 10/13 spacing
 \setlength{\topmargin}{-0.25in}
@@ -665,6 +667,8 @@ The most beautiful model
 \subsection{Philosphy and advice}
 
 \section{Cross-cutting themes}
+
+\subsection{Implementation, packages, hardware}
 
 \subsection{Rectangular data}
 
