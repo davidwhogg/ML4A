@@ -20,9 +20,10 @@
 \newcommand{\foreign}[1]{\textsl{#1}}
 \newcommand{\vs}{\foreign{vs}}
 \newcommand{\acronym}[1]{{\small{#1}}}
+\newcommand{\KDE}{\acronym{KDE}}
 \newcommand{\PCA}{\acronym{PCA}}
 \newcommand{\SVD}{\acronym{SVD}}
-\newcommand{\KDE}{\acronym{KDE}}
+\newcommand{\SVM}{\acronym{SVM}}
 \newcommand{\project}[1]{\textsl{#1}}
 \newcommand{\SDSS}{\project{\acronym{SDSS}}}
 \newcommand{\Kepler}{\project{Kepler}}
@@ -325,9 +326,53 @@ across applications and algorithms.
 
 \section{Classification}
 
-...Supervised. In astro: Star--galaxy, high-redshift quasars, cosmic rays.
+The most famous or most reported kind of machine learning is classification.
+It is a classification when a machine can recognize which online videos
+contain kittens, and which don't. In astronomy, classification is important
+at the target-selection phase of a survey: You might want to target all
+quasars, but as few hot stars as possible. Or all red giants but no red
+dwarfs. Or you might want to find the pixels in your imaging that have been
+affected by cosmic rays. All of these are classifications, because they
+are putting data (pixels or sources) into different categories.
+
+When these methods are approached from a machine-learning point of view,
+the approach is to give the machine large numbers of examples of each
+class, and train a flexible system to learn the relationship between the
+data or features of each example (patch of multi-band imaging, say) and
+the label (star or galaxy, say). The idea is to have a good enough training
+set and a good enough algorithm that the trained classifier can classify
+new objects that haven't been classified before.
+
+One note: Many uses of machine-learning classifiers in astrophysics have
+been in replacing humans in classification tasks for which
+we only know how to do the classifications
+``by eye'' or heuristically. An early example of this in the
+astronomical literature was galaxy morphologies, where only
+humans ``know'' what an elliptical galaxy is, or an S0 galaxy, but a machine
+can be trained to reproduce human behavior.\footnote{Cite} A more recent
+example is classification of red-giant stars in different evolutionary stages:
+A human can see a \todo{[Bedding project here, and reference]}. The reason
+I bring this up is that once you \emph{can} describe the differences, so it
+isn't just based on human intuition, it is often possible to build a
+classifier that is unsupervised (and not really in the domain of machine
+learning at all).\footnote{Cite projects like Lang \& Hogg, star--galaxy.}
 
 \subsection{Example: SVM}
+
+The highest-performing classification systems at the present day are based
+on deep neural networks, which I will discuss below.
+But I want to start with a very simple, very elegant, and surprisingly clever
+classifier called the Support Vector Machine (\SVM).
+This method has many beautiful properties, and it has very good performance
+in a wide range of problems (especially when married with the kernel trick,
+to be discussed below in this \sectionname, and in later \sectionnames).
+In part because of its mathematical simplicity---it relies only on vector
+inner products---the method is convex, meaning (for our purposes) that it
+produces the same result every time, has no degeneracies, and does not depend
+on initialization or any seed.
+This is a desirable property for methods used in the sciences!
+That said, there are many problems with using \SVM\ in scientific projects,
+to which I will turn below.
 
 ...SVM
 
