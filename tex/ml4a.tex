@@ -212,7 +212,8 @@ photo-zs. Also the star--quasar and galaxy-star classification
 problems. And The Cannon.
 \item[visualization and discovery]
 ...Visualization and discovery in complex data sets, like t-SNE in RAVE
-or k-means in APOGEE. Or RF in SDSS.
+or k-means in APOGEE. Or RF in SDSS. And anomaly detection, like in SDSS
+spectra and Kepler lightcurves.
 \item[operational monitoring]
 ...Operational situations: Are telescopes operating normally? I don't know
 of cases here.
@@ -650,6 +651,8 @@ extensions of \PCA:
 
 ...Unsupervised. In astro: SNe types, spectral types.
 
+...Also in astro: Anomaly detection and outliers etc.
+
 \subsection{Example: k-means}
 
 ...k-means!
@@ -689,6 +692,9 @@ it are the observed redshifts in the data sample itself.\footnote{\todo{cite}}
 Another is outlier identification: Is a particular stellar spectrum (say) an
 outlier away from the distribution of stellar spectra?
 You can't answer that if you don't know where stellar spectra lie in spectrum space.
+
+In principle density estimation could also be used to find outliers as clustering
+has been used...but...
 
 The simplest density estimate is the kernel density estimate (\KDE).
 A \KDE\ is a smoothing of the data themselves.
